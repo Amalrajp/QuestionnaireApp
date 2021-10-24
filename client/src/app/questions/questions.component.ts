@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import QuestionSet from '../models/question-set.model';
 import Question from '../models/question.model';
 import { QuestionSetService } from '../services/question-set.service';
@@ -19,7 +20,7 @@ export class QuestionsComponent implements OnInit {
   selectedQID: number = null;
   role:String;
   constructor(
-    private qService: QuestionService, private setService: QuestionSetService
+    private qService: QuestionService, private setService: QuestionSetService,private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class QuestionsComponent implements OnInit {
         let id = localStorage.getItem('activated')
         let activatedSet = res.find(s => s._id == id)
         this.setChange(activatedSet)
+        
       })
   }
 
@@ -62,6 +64,7 @@ export class QuestionsComponent implements OnInit {
         this.questions[i] = {...res}
         this.selectedQID = null
         this.tempQuestion = new Question('')
+        this._snackBar.open("Question Updated.","Success",{duration:2000});
       })
   }
 
@@ -75,6 +78,7 @@ export class QuestionsComponent implements OnInit {
     this.qService.removeQuestion(question._id)
       .subscribe(res => {
         this.questions.splice(i, 1)
+        this._snackBar.open("Question Removed.","Success",{duration:2000});
       })
   }
 
@@ -87,6 +91,7 @@ export class QuestionsComponent implements OnInit {
     newSet.questions = newQuestions
     this.setService.createSet(newSet)
       .subscribe(res => {
+        this._snackBar.open("Layout Created.","Success",{duration:2000});
         this.getData()
       })
 
