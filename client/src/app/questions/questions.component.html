@@ -1,0 +1,105 @@
+<div class="title-bar">
+    Questionnaire App
+    <span class="logout"  [routerLink]="['/']" class="logout zfcui-prometo-medium">
+        <button mat-raised-button (click)="logout()">Logout</button>
+    </span >
+  </div>
+  <div class="page-container">
+    <div class="content-container">
+      <div class="set-container">
+        <mat-list>
+          <ng-container *ngFor="let set of sets;let i=index">
+            <mat-list-item>
+              <span mat-list-icon class="selector">
+                <mat-icon [color]="set._id==selectedSetID?'accent':'basic'" (click)="setChange(set)">check_bold</mat-icon>
+              </span>
+              <div mat-line>{{set.setName}}</div>
+              <button mat-icon-button color="primary" aria-label="Icon button with a edit icon" (click)="clone(set)">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </ng-container>
+  
+  
+          <!-- <mat-list-item>
+              <mat-icon mat-list-icon>check</mat-icon>
+              <div mat-line>Set 2</div>
+              <button mat-icon-button color="primary" aria-label="Icon button with a edit icon">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" aria-label="Icon button with a edit icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-divider></mat-divider> -->
+  
+        </mat-list>
+      </div>
+      <div class="question-container">
+        <div class="button-container">
+  
+          <button mat-stroked-button color="primary" (click)="onAddClick()" [disabled]="defaultSetSelected">
+            <mat-icon>add</mat-icon> Add Question
+          </button>
+        </div>
+        <div *ngFor="let question of questions;let i=index " class="question-list">
+          <ng-container *ngIf="selectedQID!=i; else editTD">
+            <div class="colm-0">{{i+1}} </div>
+            <div class="colm-1">{{question.description}} </div>
+            <div class="colm-2"> {{question.type}} </div>
+            <div class="colm-3">
+              <button [disabled]="defaultSetSelected" mat-icon-button color="primary" (click)="editQuestion(question,i)"
+                aria-label="Icon button with a edit icon">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <div class="colm-3"> <button [disabled]="defaultSetSelected||role=='Representative'" mat-icon-button color="primary"
+                (click)="removeQuestion(question,i)" aria-label=" Icon button with a close icon">
+                <mat-icon>close</mat-icon>
+              </button></div>
+          </ng-container>
+  
+          <ng-template #editTD>
+            <div class="colm-0">{{i+1}} </div>
+            <div class="colm-1">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Question</mat-label>
+                <input matInput type="text" name="description" (keyup.enter)="updateQuestion(i)"
+                  [disabled]="tempQuestion._id" [(ngModel)]="tempQuestion.description" placeholder="Question"
+                  class="form-control">
+              </mat-form-field>
+            </div>
+  
+            <div class="colm-2">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Question Type</mat-label>
+  
+                <mat-select [(ngModel)]="tempQuestion.type">
+                  <mat-option value="Text box">Text box</mat-option>
+                  <mat-option value="Check box">Check box</mat-option>
+                  <mat-option value="Radio button">Radio button</mat-option>
+                  <mat-option value="Slider">Slider</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+  
+            <button class="colm-3" [disabled]="defaultSetSelected" mat-icon-button color="primary"
+              (click)="updateQuestion(i)" aria-label="Icon button with a edit icon">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button class="colm-3" [disabled]="defaultSetSelected" mat-icon-button color="primary"
+              (click)="cancelUpdate(i)" aria-label="Icon button with a edit icon">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-template>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+

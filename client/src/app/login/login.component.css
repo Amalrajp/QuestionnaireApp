@@ -1,0 +1,36 @@
+.titel-bar{
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #0072c6;
+    color: white;
+    font-size: 32px;
+    padding: 10px;
+}
+
+.page-container{
+    display: flex;
+    justify-content: center;
+    background-color: #e0e0e0;
+    height: calc(100vh - 60px);    
+}
+
+.content-container{
+    display: flex;
+    justify-content: center;    
+    width:400px ;
+    height: 400px;
+    background-color: #FFF;
+    box-shadow: 0 0 4px rgb(0 0 0 / 14%);
+    margin-top: 32px;
+}
+
+.example-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;  
+}
+
+.login-btn{
+    width:100px
+}

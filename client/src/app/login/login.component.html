@@ -1,0 +1,22 @@
+<div class="titel-bar">
+    Questionnaire App
+</div>
+<div class="page-container">
+    <div class="content-container">
+        <form class="example-form" (submit)="onLogin($event)">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Username </mat-label>
+                <input matInput placeholder="Username" [(ngModel)]="username" name="user_name">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Password </mat-label>
+                <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
+                <mat-hint >{{errorMsg}}</mat-hint>
+            </mat-form-field>
+            <!-- <div align="left" class="forget_pswd">Forget Password?</div> -->
+            <button mat-raised-button class="zfcui-prometo-medium" type="submit" [disabled]="btn_disable" class="login-btn">Login
+            </button>
+        </form>
+    </div>
+</div>
